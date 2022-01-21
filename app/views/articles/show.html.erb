@@ -1,13 +1,16 @@
 <h1> <%= @article.title %> </h1>
-
+<div>
+  <p>
+    Escrito por: <strong><%=@article.user.email%></strong>
+  </p>
+</div>
 <div>
     <%= @article.content %>
 </div>
 
-<div>
-    
-    <%= button_to @article, method: :delete do %>
-  Delete
-<% end %>
+<div>  
+  <%= button_to @article, method: :delete , class:"btn-delete" do %>
+    Delete
+  <% end %>
 </div>    
 

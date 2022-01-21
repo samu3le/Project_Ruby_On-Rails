@@ -1,5 +1,5 @@
 <!-- inside app/views/home/index.html.erb -->
-<h1>Welcome, this is the home page</h1>  
+<h1>Welcome <%=  current_user.email %> , this is the home page</h1>  
   
   <%= link_to "inicio", root_path, class:"btn btn-lg btn-danger" %>
 

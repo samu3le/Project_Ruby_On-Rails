@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "bienvenida", to: "home#index"
   root to: "home#index" 
+
+  get "articles/user/:user_id", to: "articles#from_author"
 
   get "articles", to: "articles#index"
   get "articles/new", to: "articles#new", as: :new_articles
