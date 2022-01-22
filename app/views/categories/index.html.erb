@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+<div class="large-container center-block">
+  <h1>Categories</h1>
+
+  <div id="categories">
+    <% @categories.each do |category| %>
+      <div class="card padding margin-top">
+        <%= render category %>
+        <p>
+          <%= link_to "Show this category", category %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "New category", new_category_path %>
+</div>

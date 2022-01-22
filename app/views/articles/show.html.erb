@@ -1,16 +1,31 @@
-<h1> <%= @article.title %> </h1>
-<div>
-  <p>
-    Escrito por: <strong><%=@article.user.email%></strong>
-  </p>
-</div>
-<div>
-    <%= @article.content %>
-</div>
+<div class="small-container center-block">
+    
+  <h1> <%= @article.title %> </h1>
+  <div>
+    <p>
+      Escrito por: <strong><%=@article.user.email%></strong>
+      <% if user_signed_in? && current_user.avatar.attached? %>  
+        <%= image_tag url_for(current_user.avatar) , height:30, width:30 %>
+      <% end %>  
+    </p>
+  </div>
+  <div>
+      <%= @article.content %>
+  </div>
+  <div class="margin-top">
+    <p class="label">Tags</p>
+    <% @article.categories.each do |category| %>
+      <span class="badge badge-pill padding" style="background-color:<%= category.color%>">
+        <%= link_to category.title, category, class:"text-white" %>
+      </span>
+    <% end %>
+  </div>  
+  <div class="actions margin-top">  
+    
+    <%= link_to "Back to articles", articles_path , class:"btn btn-primary"%> 
+    <% if user_signed_in? %> 
+     | <%= link_to "Edit this article", edit_article_path(@article) , class:"btn btn-primary"%> <%= button_to "Delete this article", @article, method: :delete , class:"btn btn-danger margin-top"%> 
+    <% end %>  
+  </div>    
 
-<div>  
-  <%= button_to @article, method: :delete , class:"btn-delete" do %>
-    Delete
-  <% end %>
-</div>    
-
+</div>

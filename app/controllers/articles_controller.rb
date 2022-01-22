@@ -19,27 +19,34 @@ class ArticlesController < ApplicationController
     end
     
     def new
-        @article = Article.new  #variable con @ es global   
+        @article = Article.new  #variable con @ es global  
+        @categories = Category.all 
     end
 
     def create
-        @article = current_user.articles.create(
-            title: params[:article][:title], 
-            content: params[:article][:content])
+        @article = current_user.articles.create(article_params)
+        
+        @article.save_categories
         redirect_to @article
     end
 
     def edit
+        @categories = Category.all 
     end
 
     def update
-        @article.update(title: params[:article][:title], content: params[:article][:content])
+        @article.update(article_params)
+        @article.save_categories
         redirect_to @article
     end
 
     def destroy
         @article.destroy
         redirect_to root_path
+    end
+
+    def article_params
+        params.require(:article).permit(:title,:content, category_elements: [])
     end
 
 end
